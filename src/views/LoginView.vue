@@ -2,11 +2,16 @@
     <div>
         <h1>Login Page</h1>
         <form>
-            <input type="text" v-model="username">
-            <input type="password" v-model="password">
+            <input type="text" placeholder="email" v-model="email">
+            <input type="password" placeholder="password" v-model="password">
             <button @click="login"> Login </button>
         </form>
+        <div v-if="errorMessage"> 
+            <p> User Not Found </p>
+        </div>
     </div>
+
+
 </template>
 
 <script>
@@ -15,10 +20,10 @@ import axios from 'axios';
 
     export default {
         name : "LoginView",
-        data(){
+        data() {
             return {
-                username:"",
-                password:"",
+                email: "",
+                password: ""
             }
         },
         methods: {
@@ -26,19 +31,20 @@ import axios from 'axios';
                 axios.request({
                     url: "https://reqres.in/api/login",
                     method : "POST",
-                    data:{
-                        username : "eve.holt@reqres.in",
-                        password : "cityslicka"
-                    },
                     headers:{
                         "Content-Type":"application/json"
-                    }
+                    },
+                    data:{
+                        email : this.email,
+                        password : this.password,
+                    },                    
                 }).then((response)=>{
                     cookies.set('loginToken', response.data.token)
                     console.log(response);
-                    this.$router.push('/game'); 
+                    this.$router.push('/game');
                 }).catch((error)=>{
                     console.log(error);
+                    this.errorMessage = "user not found";
                 })
             }
         }
