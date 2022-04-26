@@ -10,7 +10,7 @@
 </template>
 
 <script>
-
+import cookies from 'vue-cookies';
 import axios from 'axios';
 
     export default {
@@ -34,13 +34,14 @@ import axios from 'axios';
                         "Content-Type":"application/json"
                     }
                 }).then((response)=>{
+                    cookies.set('loginToken', response.data.token)
                     console.log(response);
-                    this.$router.push('/game');
+                    this.$router.push('/game'); 
                 }).catch((error)=>{
                     console.log(error);
                 })
             }
-        },
+        }
     }
 </script>
 
