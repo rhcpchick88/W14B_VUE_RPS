@@ -1,6 +1,6 @@
 <template>
     <div>
-
+        <h1>Total Score</h1>
     </div>
 </template>
 

@@ -6,8 +6,17 @@
 
 <script>
     export default {
-        name : 'ComputerSelection'
-        
+        name : 'ComputerSelection',
+        data() {
+            return {
+                selection: this.computerChoice
+            }
+        },
+        methods: {
+            computerChoice (){
+                
+            }
+        }
     }
 </script>
 
